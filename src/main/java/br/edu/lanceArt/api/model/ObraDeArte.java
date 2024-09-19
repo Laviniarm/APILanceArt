@@ -18,16 +18,16 @@ public class ObraDeArte {
     private Double valorInicial;
     private String imagem;
 
-    public ObraDeArte() {}
+    public ObraDeArte() {
+    }
 
 
-    public ObraDeArte(Long id, String titulo, String nomeArtista, Integer ano, Double valorInicial, String imagem) {
+    public ObraDeArte(Long id, String titulo, String nomeArtista, Integer ano, Double valorInicial) {
         this.id = id;
         this.titulo = titulo;
         this.nomeArtista = nomeArtista;
         this.ano = ano;
         this.valorInicial = valorInicial;
-        this.imagem = imagem;
     }
 
     public Long getId() {

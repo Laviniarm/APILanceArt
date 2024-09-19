@@ -3,9 +3,7 @@ package br.edu.lanceArt.api.controller;
 import br.edu.lanceArt.api.model.ObraDeArte;
 import br.edu.lanceArt.api.service.ObraDeArteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,9 @@ public class ObraDeArteControlador {
     @GetMapping
     public List<ObraDeArte> listar() {
         return this.service.listar();
+    }
+    @PostMapping
+    public ObraDeArte cadastrar(@RequestBody ObraDeArte obra) {
+        return this.service.cadastrar(obra);
     }
 }

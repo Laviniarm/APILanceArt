@@ -17,4 +17,8 @@ public class ObraDeArteService {
         return repositorio.findAll();
     }
 
+    public ObraDeArte cadastrar(ObraDeArte obra){
+        return repositorio.save(obra);
+    }
+
 }
