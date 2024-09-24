@@ -25,12 +25,13 @@ public class ObraDeArteControlador {
         return this.service.buscarPorId(id);
     }
 
+
     @PostMapping
     public ObraDeArte cadastrar(@RequestBody ObraDeArteDTO obra) {
         return this.service.cadastrar(obra);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ObraDeArte atualizar(@RequestBody ObraDeArteDTO obra) {
         return this.service.atualizar(obra);
     }
@@ -39,6 +40,5 @@ public class ObraDeArteControlador {
     public void remover(@PathVariable(name = "id") Long id) {
         this.service.remover(id);
     }
-
 
 }

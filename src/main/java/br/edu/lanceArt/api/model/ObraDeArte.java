@@ -11,11 +11,8 @@ public class ObraDeArte {
     private Long id;
     @Column(nullable = false)
     private String titulo;
-    @Column(nullable = false)
     private String nomeArtista;
-    @Column(nullable = false)
     private Integer ano;
-    @Column(nullable = false)
     private Double valorInicial;
     private String imagem;
 
