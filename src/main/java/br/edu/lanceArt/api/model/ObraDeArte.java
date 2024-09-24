@@ -1,5 +1,6 @@
 package br.edu.lanceArt.api.model;
 
+import br.edu.lanceArt.api.dto.ObraDeArteDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,6 +30,15 @@ public class ObraDeArte {
         this.ano = ano;
         this.valorInicial = valorInicial;
     }
+
+    public ObraDeArte(ObraDeArteDTO dto) {
+        this.titulo = dto.titulo();
+        this.nomeArtista = dto.nomeArtista();
+        this.ano = dto.ano();
+        this.valorInicial = dto.valorInicial();
+        this.imagem = dto.imagem();
+    }
+
 
     public Long getId() {
         return id;
