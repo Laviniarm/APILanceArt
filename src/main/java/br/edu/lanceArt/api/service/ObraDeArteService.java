@@ -39,7 +39,7 @@ public class ObraDeArteService {
         if (obraExistente.isPresent()) {
             ObraDeArte obraAtualizada = obraExistente.get();
             obraAtualizada.setTitulo(obraDeArteDTO.titulo());
-            obraAtualizada.setNomeArtista(obraDeArteDTO.nomeArtista());
+            obraAtualizada.setNomeArtista(obraDeArteDTO.artista());
             obraAtualizada.setAno(obraDeArteDTO.ano());
             obraAtualizada.setValorInicial(obraDeArteDTO.valorInicial());
             obraAtualizada.setImagem(obraDeArteDTO.imagem());

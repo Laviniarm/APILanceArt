@@ -11,10 +11,13 @@ public class ObraDeArte {
     private Long id;
     @Column(nullable = false)
     private String titulo;
-    private String nomeArtista;
+    private String artista;
     private Integer ano;
     private Double valorInicial;
     private String imagem;
+
+//    todo
+//    private String userId;
 
     public ObraDeArte() {
     }
@@ -23,14 +26,14 @@ public class ObraDeArte {
     public ObraDeArte(Long id, String titulo, String nomeArtista, Integer ano, Double valorInicial) {
         this.id = id;
         this.titulo = titulo;
-        this.nomeArtista = nomeArtista;
+        this.artista = nomeArtista;
         this.ano = ano;
         this.valorInicial = valorInicial;
     }
 
     public ObraDeArte(ObraDeArteDTO dto) {
         this.titulo = dto.titulo();
-        this.nomeArtista = dto.nomeArtista();
+        this.artista = dto.artista();
         this.ano = dto.ano();
         this.valorInicial = dto.valorInicial();
         this.imagem = dto.imagem();
@@ -54,11 +57,11 @@ public class ObraDeArte {
     }
 
     public String getNomeArtista() {
-        return nomeArtista;
+        return artista;
     }
 
     public void setNomeArtista(String nomeArtista) {
-        this.nomeArtista = nomeArtista;
+        this.artista = nomeArtista;
     }
 
     public Integer getAno() {
@@ -90,7 +93,7 @@ public class ObraDeArte {
         return "ObraDeArte{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
-                ", nomeArtista='" + nomeArtista + '\'' +
+                ", nomeArtista='" + artista + '\'' +
                 ", ano=" + ano +
                 ", valorInicial=" + valorInicial +
                 ", imagem='" + imagem + '\'' +

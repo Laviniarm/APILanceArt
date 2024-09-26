@@ -5,7 +5,7 @@ import br.edu.lanceArt.api.model.ObraDeArte;
 public record ObraDeArteDTO(
         Long id,
         String titulo,
-        String nomeArtista,
+        String artista,
         Integer ano,
         Double valorInicial,
         String imagem
