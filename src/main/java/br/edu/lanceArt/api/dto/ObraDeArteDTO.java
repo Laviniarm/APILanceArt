@@ -8,16 +8,19 @@ public record ObraDeArteDTO(
         String artista,
         Integer ano,
         Double valorInicial,
-        String imagem
+        String imagem,
+
+        String usuarioId
 ) {
     public ObraDeArteDTO(ObraDeArte obraDeArte) {
         this(
                 obraDeArte.getId(),
                 obraDeArte.getTitulo(),
-                obraDeArte.getNomeArtista(),
+                obraDeArte.getArtista(),
                 obraDeArte.getAno(),
                 obraDeArte.getValorInicial(),
-                obraDeArte.getImagem()
+                obraDeArte.getImagem(),
+                obraDeArte.getUsuarioId()
         );
     }
 
