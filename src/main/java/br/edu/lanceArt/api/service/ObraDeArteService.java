@@ -1,15 +1,15 @@
 package br.edu.lanceArt.api.service;
 
 import br.edu.lanceArt.api.dto.ObraDeArteDTO;
+import br.edu.lanceArt.api.exceptions.InvalidObraDeArteIdException;
+import br.edu.lanceArt.api.exceptions.ObraDeArteNotFoundException;
 import br.edu.lanceArt.api.model.ObraDeArte;
 import br.edu.lanceArt.api.repository.ObraDeArteRepositorio;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ObraDeArteService {
@@ -22,40 +22,39 @@ public class ObraDeArteService {
     }
 
     public ObraDeArte buscarPorId(Long id) {
-        return this.repositorio.findById(id).orElse(null);
+        return this.repositorio.findById(id)
+                .orElseThrow(() -> new ObraDeArteNotFoundException(id));
     }
 
-    public ObraDeArte cadastrar(ObraDeArteDTO obraDeArteInserir){
+    public ObraDeArte cadastrar(ObraDeArteDTO obraDeArteInserir) {
         return repositorio.save(new ObraDeArte(obraDeArteInserir));
     }
 
     @Transactional
-    public ObraDeArte atualizar(ObraDeArteDTO obraDeArteDTO){
+    public ObraDeArte atualizar(ObraDeArteDTO obraDeArteDTO) {
         if (obraDeArteDTO.id() == null) {
-            throw new IllegalArgumentException("O ID da obra de arte não pode ser nulo para atualização.");
+            throw new InvalidObraDeArteIdException();
         }
-        Optional<ObraDeArte> obraExistente = repositorio.findById(obraDeArteDTO.id());
+        ObraDeArte obraAtualizada = repositorio.findById(obraDeArteDTO.id())
+                .orElseThrow(() -> new ObraDeArteNotFoundException(obraDeArteDTO.id()));
 
-        if (obraExistente.isPresent()) {
-            ObraDeArte obraAtualizada = obraExistente.get();
-            obraAtualizada.setTitulo(obraDeArteDTO.titulo());
-            obraAtualizada.setArtista(obraDeArteDTO.artista());
-            obraAtualizada.setAno(obraDeArteDTO.ano());
-            obraAtualizada.setValorInicial(obraDeArteDTO.valorInicial());
-            obraAtualizada.setImagem(obraDeArteDTO.imagem());
+        obraAtualizada.setTitulo(obraDeArteDTO.titulo());
+        obraAtualizada.setArtista(obraDeArteDTO.artista());
+        obraAtualizada.setAno(obraDeArteDTO.ano());
+        obraAtualizada.setValorInicial(obraDeArteDTO.valorInicial());
+        obraAtualizada.setImagem(obraDeArteDTO.imagem());
 
-            return repositorio.save(obraAtualizada);
-        } else {
-            throw new EntityNotFoundException("Obra de arte não encontrada.");
-        }
+        return repositorio.save(obraAtualizada);
     }
 
-    public void remover(Long id){
-        repositorio.deleteById(id);
+    @Transactional
+    public void remover(Long id) {
+        ObraDeArte obra = repositorio.findById(id)
+                .orElseThrow(() -> new ObraDeArteNotFoundException(id));
+        repositorio.delete(obra);
     }
 
-    public List<ObraDeArte> listarPorUsuarioId(String usuarioId){
+    public List<ObraDeArte> listarPorUsuarioId(String usuarioId) {
         return repositorio.findByUsuarioId(usuarioId);
     }
-
 }
