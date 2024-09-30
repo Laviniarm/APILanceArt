@@ -16,19 +16,21 @@ public class ObraDeArte {
     private Double valorInicial;
     private String imagem;
 
-//    todo
-//    private String userId;
+    private String usuarioId;
+
 
     public ObraDeArte() {
     }
 
 
-    public ObraDeArte(Long id, String titulo, String nomeArtista, Integer ano, Double valorInicial) {
+    public ObraDeArte(Long id, String titulo, String nomeArtista, Integer ano, Double valorInicial, String usuarioId) {
         this.id = id;
         this.titulo = titulo;
         this.artista = nomeArtista;
         this.ano = ano;
         this.valorInicial = valorInicial;
+        this.usuarioId = usuarioId;
+
     }
 
     public ObraDeArte(ObraDeArteDTO dto) {
@@ -37,6 +39,7 @@ public class ObraDeArte {
         this.ano = dto.ano();
         this.valorInicial = dto.valorInicial();
         this.imagem = dto.imagem();
+        this.usuarioId = dto.usuarioId();
     }
 
 
@@ -56,11 +59,11 @@ public class ObraDeArte {
         this.titulo = titulo;
     }
 
-    public String getNomeArtista() {
+    public String getArtista() {
         return artista;
     }
 
-    public void setNomeArtista(String nomeArtista) {
+    public void setArtista(String nomeArtista) {
         this.artista = nomeArtista;
     }
 
@@ -86,6 +89,14 @@ public class ObraDeArte {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public String getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     @Override

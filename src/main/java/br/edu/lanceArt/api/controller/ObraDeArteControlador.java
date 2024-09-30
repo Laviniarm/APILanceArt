@@ -41,4 +41,11 @@ public class ObraDeArteControlador {
         this.service.remover(id);
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<ObraDeArte> listarPorUsuario(@PathVariable(name = "usuarioId") String usuarioId) {
+        return this.service.listarPorUsuarioId(usuarioId);
+    }
+
+
+
 }

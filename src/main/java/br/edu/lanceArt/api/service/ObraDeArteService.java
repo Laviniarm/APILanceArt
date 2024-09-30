@@ -39,7 +39,7 @@ public class ObraDeArteService {
         if (obraExistente.isPresent()) {
             ObraDeArte obraAtualizada = obraExistente.get();
             obraAtualizada.setTitulo(obraDeArteDTO.titulo());
-            obraAtualizada.setNomeArtista(obraDeArteDTO.artista());
+            obraAtualizada.setArtista(obraDeArteDTO.artista());
             obraAtualizada.setAno(obraDeArteDTO.ano());
             obraAtualizada.setValorInicial(obraDeArteDTO.valorInicial());
             obraAtualizada.setImagem(obraDeArteDTO.imagem());
@@ -52,6 +52,10 @@ public class ObraDeArteService {
 
     public void remover(Long id){
         repositorio.deleteById(id);
+    }
+
+    public List<ObraDeArte> listarPorUsuarioId(String usuarioId){
+        return repositorio.findByUsuarioId(usuarioId);
     }
 
 }
