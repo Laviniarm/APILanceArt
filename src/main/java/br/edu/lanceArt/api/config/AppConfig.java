@@ -1,4 +1,4 @@
-package br.edu.lanceArt.api;
+package br.edu.lanceArt.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

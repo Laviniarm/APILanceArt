@@ -1,5 +1,6 @@
-package br.edu.lanceArt.api;
+package br.edu.lanceArt.api.config;
 
+import br.edu.lanceArt.api.ApiApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
