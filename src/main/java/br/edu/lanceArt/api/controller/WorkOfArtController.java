@@ -56,8 +56,8 @@ public class WorkOfArtController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<WorkOfArt>> findByUserId(@PathVariable String userId) {
-        List<WorkOfArt> works = this.service.findByUserId(userId);
+    public ResponseEntity<List<WorkOfArt>> findByUserId(@PathVariable Long userId) {
+        List<WorkOfArt> works = service.findByUserId(userId);
         return ResponseEntity.ok(works);
     }
 }

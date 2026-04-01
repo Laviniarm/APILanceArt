@@ -1,10 +1,8 @@
 package br.edu.lanceArt.api.entity;
 
-import br.edu.lanceArt.api.dto.WorkOfArtCreateDTO;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_obras")
@@ -27,21 +25,22 @@ public class WorkOfArt {
     @Column(length = 500)
     private String image;
 
-    @Column(nullable = false)
-    private String userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     public WorkOfArt() {
     }
 
     public WorkOfArt(Long id, String title, String artist, Integer year,
-                     BigDecimal initialValue, String image, String userId) {
+                     BigDecimal initialValue, String image, User user) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.year = year;
         this.initialValue = initialValue;
         this.image = image;
-        this.userId = userId;
+        this.user = user;
     }
 
 
@@ -93,25 +92,24 @@ public class WorkOfArt {
         this.image = image;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "WorkOfArt{" +
                 "id=" + id +
-                ", id=" + id +
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", year=" + year +
                 ", initialValue=" + initialValue +
                 ", image='" + image + '\'' +
-                ", userId='" + userId + '\'' +
+                ", userId=" + (user != null ? user.getId() : null) +
                 '}';
     }
 }

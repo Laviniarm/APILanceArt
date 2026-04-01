@@ -2,9 +2,11 @@ package br.edu.lanceArt.api.service;
 
 import br.edu.lanceArt.api.dto.WorkOfArtCreateDTO;
 import br.edu.lanceArt.api.dto.WorkOfArtResponseDTO;
+import br.edu.lanceArt.api.entity.User;
 import br.edu.lanceArt.api.entity.WorkOfArt;
-import br.edu.lanceArt.api.exceptions.InvalidObraDeArteIdException;
 import br.edu.lanceArt.api.exceptions.ObraDeArteNotFoundException;
+import br.edu.lanceArt.api.exceptions.UserNotFoundException;
+import br.edu.lanceArt.api.repository.UserRepository;
 import br.edu.lanceArt.api.repository.WorkOfArtRepositorio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class WorkOfArtService {
 
     @Autowired
     private WorkOfArtRepositorio repository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public List<WorkOfArtResponseDTO> list() {
         return repository.findAll()
@@ -33,6 +38,8 @@ public class WorkOfArtService {
     }
 
     public WorkOfArtResponseDTO create(WorkOfArtCreateDTO dto) {
+        User user = userRepository.findById(dto.userId())
+                .orElseThrow(() -> new UserNotFoundException(dto.userId()));
 
         WorkOfArt work = new WorkOfArt();
         work.setTitle(dto.title());
@@ -40,7 +47,7 @@ public class WorkOfArtService {
         work.setYear(dto.year());
         work.setInitialValue(dto.initialValue());
         work.setImage(dto.image());
-        work.setUserId(dto.userId());
+        work.setUser(user);
 
         WorkOfArt saved = repository.save(work);
 
@@ -50,6 +57,8 @@ public class WorkOfArtService {
 
     @Transactional
     public WorkOfArtResponseDTO update(Long id, WorkOfArtCreateDTO dto) {
+        User user = userRepository.findById(dto.userId())
+                .orElseThrow(() -> new UserNotFoundException(dto.userId()));
 
         WorkOfArt work = repository.findById(id)
                 .orElseThrow(() -> new ObraDeArteNotFoundException(id));
@@ -59,7 +68,7 @@ public class WorkOfArtService {
         work.setYear(dto.year());
         work.setInitialValue(dto.initialValue());
         work.setImage(dto.image());
-        work.setUserId(dto.userId());
+        work.setUser(user);
 
         return new WorkOfArtResponseDTO(work);
     }
@@ -72,7 +81,7 @@ public class WorkOfArtService {
         repository.delete(work);
     }
 
-    public List<WorkOfArt> findByUserId(String userId) {
-        return repository.findByUsuarioId(userId);
+    public List<WorkOfArt> findByUserId(Long userId) {
+        return repository.findByUser_Id(userId);
     }
 }

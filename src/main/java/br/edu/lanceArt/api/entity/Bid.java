@@ -2,6 +2,9 @@ package br.edu.lanceArt.api.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+
 @Entity
 public class Bid {
 
@@ -9,8 +12,11 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String valor;
-    private String data;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal valor;
+
+    @Column(nullable = false)
+    private OffsetDateTime data;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -20,7 +26,7 @@ public class Bid {
     @JoinColumn(name = "obra_de_arte_id")
     private WorkOfArt workOfArt;
 
-    public Bid(String valor, String data, User user, WorkOfArt workOfArt) {
+    public Bid(BigDecimal valor, OffsetDateTime data, User user, WorkOfArt workOfArt) {
         this.valor = valor;
         this.data = data;
         this.user = user;
@@ -39,19 +45,19 @@ public class Bid {
         this.id = id;
     }
 
-    public String getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public String getData() {
+    public OffsetDateTime getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(OffsetDateTime data) {
         this.data = data;
     }
 

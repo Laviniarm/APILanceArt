@@ -1,6 +1,7 @@
 package br.edu.lanceArt.api.dto;
 
 import java.math.BigDecimal;
+
 import br.edu.lanceArt.api.entity.WorkOfArt;
 
 
@@ -11,7 +12,7 @@ public record WorkOfArtResponseDTO(
     Integer year,
     BigDecimal initialValue,
     String image,
-    String userId
+    UserSummaryDTO user
 
 ) {
 
@@ -23,7 +24,7 @@ public record WorkOfArtResponseDTO(
                     workOfArt.getYear(),
                     workOfArt.getInitialValue(),
                     workOfArt.getImage(),
-                    workOfArt.getUserId()
+                    new UserSummaryDTO(workOfArt.getUser())
             );
         }
     }

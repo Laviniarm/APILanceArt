@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface WorkOfArtRepositorio extends JpaRepository<WorkOfArt, Long> {
 
-    List<WorkOfArt> findByUsuarioId(String usuarioId);
+    List<WorkOfArt> findByUser_Id(Long userId);
 
 }
